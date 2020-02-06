@@ -1,4 +1,4 @@
-# Install script for directory: /Users/hanyiwang/Desktop/Rice/COMP530 Database Implementation/A2/Main
+# Install script for directory: /Users/dingjiali/COMP-530/A2/Main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/hanyiwang/Desktop/Rice/COMP530 Database Implementation/A2/Main/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/dingjiali/COMP-530/A2/Main/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

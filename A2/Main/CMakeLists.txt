@@ -19,7 +19,7 @@ add_executable(Main
         BufferMgr/headers/TableCompare.h
         BufferMgr/source/MyDB_BufferManager.cc
         BufferMgr/source/MyDB_Page.cc
-        BufferTest/source/BufferQUnit.cc
+#        BufferTest/source/BufferQUnit.cc
         Catalog/headers/MyDB_AttType.h
         Catalog/headers/MyDB_Catalog.h
         Catalog/headers/MyDB_PageType.h
@@ -28,10 +28,15 @@ add_executable(Main
         Catalog/source/MyDB_Catalog.cc
         Catalog/source/MyDB_Schema.cc
         Catalog/source/MyDB_Table.cc
+        DatabaseTable/headers/MyDB_PageHeader.h
+        DatabaseTable/headers/MyDB_PageIterator.h
         DatabaseTable/headers/MyDB_PageReaderWriter.h
         DatabaseTable/headers/MyDB_RecordIterator.h
+        DatabaseTable/headers/MyDB_TableIterator.h
         DatabaseTable/headers/MyDB_TableReaderWriter.h
+        DatabaseTable/source/MyDB_PageIterator.cc
         DatabaseTable/source/MyDB_PageReaderWriter.cc
+        DatabaseTable/source/MyDB_TableIterator.cc
         DatabaseTable/source/MyDB_TableReaderWriter.cc
         Qunit/headers/QUnit.h
         Record/headers/MyDB_AttVal.h

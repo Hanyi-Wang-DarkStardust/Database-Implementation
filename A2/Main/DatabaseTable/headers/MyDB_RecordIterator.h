@@ -27,6 +27,7 @@ public:
 
 	// destructor and contructor
 	MyDB_RecordIterator () {};
+
 	virtual ~MyDB_RecordIterator () {};
 
 };
