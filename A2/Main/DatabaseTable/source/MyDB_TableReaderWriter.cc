@@ -12,7 +12,6 @@ using namespace std;
 MyDB_TableReaderWriter :: MyDB_TableReaderWriter (MyDB_TablePtr forMe, MyDB_BufferManagerPtr myBuffer) {
     table = forMe;
     bufferMgr = myBuffer;
-    // If no page in the table
     if (table->lastPage() == -1) {
         table->setLastPage(0);
         MyDB_PageHandle page = bufferMgr->getPage(table, table->lastPage());
@@ -20,7 +19,6 @@ MyDB_TableReaderWriter :: MyDB_TableReaderWriter (MyDB_TablePtr forMe, MyDB_Buff
         pageReaderWriter->clear();
         pageVec.push_back(pageReaderWriter);
     } else {
-        // put all ReaderWriterPtr into the pageVec
         for (int i = 0; i <= table->lastPage(); i++) {
             MyDB_PageHandle page = bufferMgr->getPage(table, i);
             MyDB_PageReaderWriterPtr pageReaderWriter = make_shared<MyDB_PageReaderWriter>(page, bufferMgr);
@@ -31,27 +29,21 @@ MyDB_TableReaderWriter :: MyDB_TableReaderWriter (MyDB_TablePtr forMe, MyDB_Buff
 
 
 
-MyDB_PageReaderWriter MyDB_TableReaderWriter :: operator[] (size_t idx) {
-    // Check validity of input index
-    if (idx < 0) {
+MyDB_PageReaderWriter MyDB_TableReaderWriter :: operator[] (size_t i) {
+    // Check validity of i
+    if (i < 0) {
         cout << "Invalid indexing" << endl;
         exit(EXIT_FAILURE);
     }
-
-    // Valid input
-    if (idx <= table->lastPage()) {
-        return *(pageVec[idx]);
-    }
-
-    // If input is out of pages
-    while (idx > table->lastPage()) {
+    while (i > table->lastPage()) {
         table->setLastPage(table->lastPage() + 1);
         MyDB_PageHandle page = bufferMgr->getPage(table, table->lastPage());
         MyDB_PageReaderWriterPtr targetPageReaderWriter = make_shared<MyDB_PageReaderWriter>(page, bufferMgr);
         targetPageReaderWriter->clear();
         pageVec.push_back(targetPageReaderWriter);
     }
-    return *(pageVec[idx]);
+
+    return *(pageVec[i]);
 }
 
 
@@ -66,10 +58,8 @@ MyDB_PageReaderWriter MyDB_TableReaderWriter :: last () {
 void MyDB_TableReaderWriter :: append (MyDB_RecordPtr appendMe) {
     // Check if appending new rec to the last page is available (i.e. is the last page full?)
     bool appendSuccess = pageVec.back()->append(appendMe);
-    if (appendSuccess) {
-        return; // indicate successfully append
-    } else {
-        // Add another pageRW as the last one and append to it
+    if (!appendSuccess)
+    {
         table->setLastPage(table->lastPage() + 1);
         MyDB_PageHandle page = bufferMgr->getPage(table, table->lastPage());
         MyDB_PageReaderWriterPtr lastPage = make_shared<MyDB_PageReaderWriter>(page, bufferMgr);
@@ -87,12 +77,15 @@ void MyDB_TableReaderWriter :: loadFromTextFile (string fromMe) {
     ifstream loadFile;
     loadFile.open(fromMe);
     if (loadFile.is_open()) {
+        for (auto iter : pageVec) {
+            iter->clear();
+        }
         table->setLastPage(0);
         MyDB_RecordPtr emptyRecord = getEmptyRecord();
         string recordString;
         while (getline(loadFile,recordString)) {
             emptyRecord->fromString(recordString);
-            this->append(emptyRecord);
+            append(emptyRecord);
         }
     } else {
         cout << "Cannot load from file!!!!" << endl;

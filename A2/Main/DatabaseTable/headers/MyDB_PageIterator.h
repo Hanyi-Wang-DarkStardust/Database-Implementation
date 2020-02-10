@@ -24,8 +24,6 @@ public:
 
     MyDB_PageIterator(MyDB_RecordPtr recordPtr, MyDB_PageHandle pageHandle, MyDB_PageHeaderPtr headerPtr);
 
-    // ~MyDB_PageIterator();
-
 private:
     MyDB_RecordPtr record;
 

@@ -6,7 +6,7 @@
 #include <float.h>
 #include <climits>
 #include <memory>
-#include <string>
+#include <string.h>
 
 // create a smart pointer for database tables
 using namespace std;

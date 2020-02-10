@@ -55,7 +55,7 @@ private:
 
     MyDB_TablePtr table;
 
-    vector<MyDB_PageReaderWriterPtr> pageVec;   // store pageReaderWriter*\
+    vector<MyDB_PageReaderWriterPtr> pageVec;   // store pageReaderWriter*
 };
 
 #endif

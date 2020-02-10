@@ -42,9 +42,4 @@ bool MyDB_PageReaderWriter :: append (MyDB_RecordPtr appendMe) {
     else return false;
 }
 
-
-//MyDB_PageReaderWriter :: ~MyDB_PageReaderWriter() {
-//
-//}
-
 #endif

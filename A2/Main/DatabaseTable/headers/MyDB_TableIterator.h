@@ -20,8 +20,6 @@ public:
 
     MyDB_TableIterator(MyDB_RecordPtr recordPtr, MyDB_TableReaderWriter& tableReaderWriter, MyDB_TablePtr tablePtr);
 
-    //~MyDB_TableIterator();
-
 private:
     MyDB_RecordPtr record;
     MyDB_TableReaderWriter & tableRW; // convenient to use operator []

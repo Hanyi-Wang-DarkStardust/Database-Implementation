@@ -41,7 +41,6 @@ public:
 
 	MyDB_PageReaderWriter(MyDB_PageHandle pageHandle, MyDB_BufferManagerPtr bufferManager);
 
-//	~MyDB_PageReaderWriter();
 	
 private:
 
